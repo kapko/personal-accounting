@@ -54,13 +54,13 @@
 
 	var _helper2 = _interopRequireDefault(_helper);
 
-	var _appModule = __webpack_require__(3);
+	var _countModule = __webpack_require__(3);
 
-	var _appModule2 = _interopRequireDefault(_appModule);
+	var _countModule2 = _interopRequireDefault(_countModule);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var Main = angular.module('main', ['ngMaterial', 'ngMessages', 'ui.router', 'smDateTimeRangePicker', _appModule2.default.name]).service('http', _http2.default).service('helper', _helper2.default);
+	var Main = angular.module('main', ['ngMaterial', 'ngMessages', 'ui.router', 'smDateTimeRangePicker', _countModule2.default.name]).service('http', _http2.default).service('helper', _helper2.default);
 
 	Main.config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
 		$stateProvider.state('main', {
@@ -140,56 +140,6 @@
 	helperCtr.$inject = ['$mdDialog', '$state', 'http', '$rootScope'];
 
 	function helperCtr($mdDialog, $state, http, $rootScope) {
-		var limit = 30,
-		    currentPage = 1,
-		    pageSize = 10,
-
-		// _biz = window.API_STATE.business.id,
-		date = new Date(),
-		    times = [date.getDate(), date.getMonth() + 1],
-		    values = [];
-
-		// get_start_date
-		times.map(function (item) {
-			values.push(item.toString().replace(/^([0-9])$/, '0$1'));
-		});
-		var today = date.getFullYear() + '-' + values[1] + '-' + values[0];
-
-		var colors = [{ name: '7aade6' }, { name: '72d1ea' }, { name: '71e5bc' }, { name: 'abe58c' }, { name: 'e2d287' }, { name: 'e3a279' }, { name: 'e57878' }, { name: 'eb8ac6' }, { name: 'd890e9' }];
-		var periods = [{
-			value: 'weeks',
-			season: 'weeks',
-			name: 'visit(s) in a week'
-		}, {
-			value: 'months',
-			season: 'months',
-			name: 'visit(s) in a months'
-		}, {
-			value: 'year',
-			season: 'year',
-			name: 'visit(s) in a year'
-		}];
-
-		var question_type = [{
-			id: 1,
-			name: 'text'
-		}, {
-			id: 2,
-			name: 'paragraph'
-		}, {
-			id: 3,
-			name: 'address'
-		}, {
-			id: 4,
-			name: 'date'
-		}, {
-			id: 5,
-			name: 'checkbox'
-		}, {
-			id: 6,
-			name: 'terms-and-conditions'
-		}];
-
 		// METHODS //
 		function alert(_ref) {
 			var type = _ref.type,
@@ -225,78 +175,8 @@
 			}
 		}
 
-		function findError(data) {
-			var error = {};
-			Object.keys(data).map(function (key) {
-				error[key] = true;
-			});
-			return error;
-		}
-
-		function paginationFn(_ref2) {
-			var dataLength = _ref2.dataLength,
-			    index = _ref2.index,
-			    callB = _ref2.callB,
-			    limitItem = _ref2.limitItem;
-
-			if (index == dataLength / pageSize) {
-				callB(limitItem + limit);
-			}
-		}
-
-		function getAllListings(callB) {
-			http.getAll(['biz_', _biz, '/listings'], function (res) {
-				return callB(res);
-			});
-		}
-
-		function fileCrop(e, call) {
-			var file = e.currentTarget.files[0],
-			    reader = new FileReader();
-
-			reader.onload = function (e) {
-				$rootScope.$apply(function ($rootScope) {
-					return call(e.target.result);
-				});
-			};
-
-			reader.readAsDataURL(file);
-		}
-
-		function getIds(someData, keep) {
-			someData.map(function (item) {
-				keep.push(item.id);
-			});
-		}
-
-		// get_format_of_date
-		function getFormat(date) {
-			var d = new Date(date),
-			    month = '' + (d.getMonth() + 1),
-			    day = '' + d.getDate(),
-			    year = d.getFullYear();
-
-			if (month.length < 2) month = '0' + month;
-			if (day.length < 2) day = '0' + day;
-
-			return [year, month, day].join('-');
-		}
-
 		var data = {
-			currentPage: currentPage,
-			pageSize: pageSize,
-			periods: periods,
-			alert: alert,
-			findError: findError,
-			limit: limit,
-			paginationFn: paginationFn,
-			getAllListings: getAllListings,
-			question_type: question_type,
-			fileCrop: fileCrop,
-			colors: colors,
-			getIds: getIds,
-			today: today,
-			getFormat: getFormat
+			alert: alert
 		};
 
 		return data;
@@ -314,36 +194,135 @@
 		value: true
 	});
 
-	var _appTemplate = __webpack_require__(4);
+	var _countTemplate = __webpack_require__(4);
 
-	var _appTemplate2 = _interopRequireDefault(_appTemplate);
+	var _countTemplate2 = _interopRequireDefault(_countTemplate);
 
-	var _appController = __webpack_require__(5);
+	var _countController = __webpack_require__(5);
 
-	var _appController2 = _interopRequireDefault(_appController);
+	var _countController2 = _interopRequireDefault(_countController);
 
-	__webpack_require__(6);
+	var _sidebarTemplate = __webpack_require__(6);
 
-	var _editModule = __webpack_require__(10);
+	var _sidebarTemplate2 = _interopRequireDefault(_sidebarTemplate);
+
+	__webpack_require__(7);
+
+	__webpack_require__(11);
+
+	var _listModule = __webpack_require__(13);
+
+	var _listModule2 = _interopRequireDefault(_listModule);
+
+	var _limitModule = __webpack_require__(22);
+
+	var _limitModule2 = _interopRequireDefault(_limitModule);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	// modules //
+	var link = 'main.count',
+	    count = angular.module(link, [_listModule2.default.ame, _limitModule2.default.name]);
+
+	count.config(function ($stateProvider) {
+		$stateProvider.state(link, {
+			url: '/',
+			views: {
+				'content@': {
+					template: _countTemplate2.default,
+					controller: _countController2.default,
+					controllerAs: 'self'
+				},
+				'sidebar@': {
+					template: _sidebarTemplate2.default
+				}
+			}
+		});
+	});
+
+	exports.default = count;
+
+/***/ },
+/* 4 */
+/***/ function(module, exports) {
+
+	module.exports = "<h1>welcome home page!</h1>";
+
+/***/ },
+/* 5 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	countCtr.$inject = ['$state'];
+	function countCtr($state) {}
+
+	exports.default = countCtr;
+
+/***/ },
+/* 6 */
+/***/ function(module, exports) {
+
+	module.exports = "<md-list>\n\t<md-list-item ui-sref=\"main.count\">Home</md-list-item>\n\t<md-list-item ui-sref=\"main.count.list\">Listings</md-list-item>\n\t<md-list-item ui-sref=\"main.count.limit\">Limits</md-list-item>\n</md-list>\n\n";
+
+/***/ },
+/* 7 */
+/***/ function(module, exports) {
+
+	// removed by extract-text-webpack-plugin
+
+/***/ },
+/* 8 */,
+/* 9 */,
+/* 10 */,
+/* 11 */
+/***/ function(module, exports) {
+
+	// removed by extract-text-webpack-plugin
+
+/***/ },
+/* 12 */,
+/* 13 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _listTemplate = __webpack_require__(14);
+
+	var _listTemplate2 = _interopRequireDefault(_listTemplate);
+
+	var _listController = __webpack_require__(15);
+
+	var _listController2 = _interopRequireDefault(_listController);
+
+	var _editModule = __webpack_require__(16);
 
 	var _editModule2 = _interopRequireDefault(_editModule);
 
-	var _createModule = __webpack_require__(13);
+	var _createModule = __webpack_require__(19);
 
 	var _createModule2 = _interopRequireDefault(_createModule);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	// modules //
-	var app = angular.module('main.app', [_editModule2.default.name, _createModule2.default.name]);
+	var link = 'main.count.list',
+	    app = angular.module(link, [_editModule2.default.name, _createModule2.default.name]);
 
 	app.config(function ($stateProvider) {
-		$stateProvider.state('main.app', {
-			url: '/',
+		$stateProvider.state(link, {
+			url: 'listings',
 			views: {
 				'content@': {
-					template: _appTemplate2.default,
-					controller: _appController2.default,
+					template: _listTemplate2.default,
+					controller: _listController2.default,
 					controllerAs: 'self'
 				}
 			}
@@ -353,13 +332,13 @@
 	exports.default = app;
 
 /***/ },
-/* 4 */
+/* 14 */
 /***/ function(module, exports) {
 
-	module.exports = "<md-container layout=\"row\">\n\t<md-input-container flex=\"100\">\n\t\t<label>Search ...</label>\n\t\t<input ng-model=\"self.search\">\n\t</md-input-container>\n\t<md-button \n\t\tui-sref=\"main.app.create\"\n\t\tclass=\"md-raised md-warn\">create new </md-button>\n</md-container>\n\n<md-content  \n\tlayout-padding\n\tmd-colors=\"{background: 'green'}\"\n\tlayout=\"row\">\n\t<md-list flex=\"10\"><strong>#</strong></md-list>\n\t<md-list flex=\"100\"><strong>Name</strong></md-list>\n\t<md-list flex=\"100\"><strong>Price</strong></md-list>\n\t<md-list flex=\"100\"><strong>Limit</strong></md-list>\n\t<md-list flex=\"100\"><strong>Description</strong></md-list> \n\t<md-list flex=\"100\"><strong>date</strong></md-list>\n</md-content>\n\n<md-content  \n\tng-repeat=\"list in self.lists\"\n\tstyle=\"border-top: 1px solid #333;\"\n\tlayout-padding\n\tlayout=\"row\">\n\t<md-list flex=\"10\"><p>#</p></md-list>\n\t<md-list flex=\"100\"><p>{{ list.title }}</p></md-list>\n\t<md-list flex=\"100\"><p>{{ list.price }}</p></md-list>\n\t<md-list flex=\"100\"><p>{{ list.limit }}</p></md-list>\n\t<md-list flex=\"100\"><p>{{ list.description }}</p></md-list>\n\t<md-list flex=\"100\">\n\t\t<span>{{ list.start_day }}</span>\n\t\t<i \n\t\t\tui-sref=\"main.app.edit({id: list._id})\"\n\t\t\tclass=\"material-icons\">create</i>\n\t\t<i \n\t\t\tng-click=\"self.remove(list)\"\n\t\t\tclass=\"material-icons\">delete</i>\n\t</md-list>\n</md-content>\n\n<md-content  \n\tlayout-padding\n\tstyle=\"border-top: 5px solid #eee;\"\n\tmd-colors=\"{background: 'green'}\"\n\tlayout=\"row\">\n\t<md-list flex=\"50\"><span>Total is</span></md-list>\n\t<md-list flex=\"50\"><strong>{{ self.total }}</strong></md-list>\n</md-content>\n\n\n";
+	module.exports = "<md-container layout=\"row\">\n\t<md-input-container flex=\"100\">\n\t\t<label>Search ...</label>\n\t\t<input ng-model=\"self.search\">\n\t</md-input-container>\n\t<md-button \n\t\tui-sref=\"main.app.create\"\n\t\tclass=\"md-raised md-warn\">create new </md-button>\n</md-container>\n\n<md-content  \n\tlayout-padding\n\tmd-colors=\"{background: 'green'}\"\n\tlayout=\"row\">\n\t<md-list flex=\"10\"><strong>#</strong></md-list>\n\t<md-list flex=\"100\"><strong>Name</strong></md-list>\n\t<md-list flex=\"100\"><strong>Price</strong></md-list>\n\t<md-list flex=\"100\"><strong>Limit</strong></md-list>\n\t<md-list flex=\"100\"><strong>Description</strong></md-list> \n\t<md-list flex=\"100\"><strong>date</strong></md-list>\n</md-content>\n\n<md-content  \n\tng-repeat=\"list in self.lists\"\n\tstyle=\"border-top: 1px solid #333;\"\n\tlayout-padding\n\tlayout=\"row\">\n\t<md-list flex=\"10\"><p>#</p></md-list>\n\t<md-list flex=\"100\"><p>{{ list.title }}</p></md-list>\n\t<md-list flex=\"100\"><p>{{ list.price }}</p></md-list>\n\t<md-list flex=\"100\"><p>{{ list.limit }}</p></md-list>\n\t<md-list flex=\"100\"><p>{{ list.description }}</p></md-list>\n\t<md-list flex=\"100\">\n\t\t<span>{{ list.start_day }}</span>\n\t\t<i \n\t\t\tui-sref=\"main.count.list.edit({id: list._id})\"\n\t\t\tclass=\"material-icons\">create</i>\n\t\t<i \n\t\t\tng-click=\"self.remove(list)\"\n\t\t\tclass=\"material-icons\">delete</i>\n\t</md-list>\n</md-content>\n\n<md-content  \n\tlayout-padding\n\tstyle=\"border-top: 5px solid #eee;\"\n\tmd-colors=\"{background: 'green'}\"\n\tlayout=\"row\">\n\t<md-list flex=\"50\"><span>Total is</span></md-list>\n\t<md-list flex=\"50\"><strong>{{ self.total }}</strong></md-list>\n</md-content>\n\n\n";
 
 /***/ },
-/* 5 */
+/* 15 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -402,16 +381,7 @@
 	exports.default = appCtr;
 
 /***/ },
-/* 6 */
-/***/ function(module, exports) {
-
-	// removed by extract-text-webpack-plugin
-
-/***/ },
-/* 7 */,
-/* 8 */,
-/* 9 */,
-/* 10 */
+/* 16 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -420,17 +390,17 @@
 		value: true
 	});
 
-	var _editTemplate = __webpack_require__(11);
+	var _editTemplate = __webpack_require__(17);
 
 	var _editTemplate2 = _interopRequireDefault(_editTemplate);
 
-	var _editController = __webpack_require__(12);
+	var _editController = __webpack_require__(18);
 
 	var _editController2 = _interopRequireDefault(_editController);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var link = 'main.app.edit',
+	var link = 'main.count.list.edit',
 	    app = angular.module(link, []);
 
 	app.config(function ($stateProvider) {
@@ -449,13 +419,13 @@
 	exports.default = app;
 
 /***/ },
-/* 11 */
+/* 17 */
 /***/ function(module, exports) {
 
 	module.exports = "edit template";
 
 /***/ },
-/* 12 */
+/* 18 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -470,7 +440,7 @@
 	exports.default = editCtr;
 
 /***/ },
-/* 13 */
+/* 19 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -479,17 +449,17 @@
 		value: true
 	});
 
-	var _createTemplate = __webpack_require__(14);
+	var _createTemplate = __webpack_require__(20);
 
 	var _createTemplate2 = _interopRequireDefault(_createTemplate);
 
-	var _createController = __webpack_require__(15);
+	var _createController = __webpack_require__(21);
 
 	var _createController2 = _interopRequireDefault(_createController);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var link = 'main.app.create',
+	var link = 'main.count.list.create',
 	    app = angular.module(link, []);
 
 	app.config(function ($stateProvider) {
@@ -508,13 +478,13 @@
 	exports.default = app;
 
 /***/ },
-/* 14 */
+/* 20 */
 /***/ function(module, exports) {
 
-	module.exports = "<form \n\tname=\"create\"\n\tnovalidate\n\tng-submit=\"create.$valid && self.save()\" \n>\n<md-input-container layout=\"row\" flex=\"100\">\n\t<label>Title</label>\n\t<input required ng-model=\"self.data.title\">\n</md-input-container>\n<br>\n\n<md-input-container flex=\"100\" layout=\"row\">\n\t<label>price</label>\n\t<input required type=\"number\" ng-model=\"self.data.price\">\n</md-input-container>\n<br>\n\n<md-input-container flex=\"100\" layout=\"row\">\n\t<label>Description</label>\n\t<input ng-model=\"self.data.description\">\n</md-input-container>\n<br>\n\n<div  layout=\"row\"> \n    <sm-date-time-picker \n        fname=\"field\" \n        label=\"Date of Birth\"\n        ng-model=\"self.data.start_day\" \n        flex=\"50\"\n        flex-sm=\"100\"\n        on-focus\n        flex-xs=\"100\"                          \n        is-required=\"{{true}}\" \n        format=\"MM-DD-YYYY\"\n        mode=\"date\" \n        week-start-day=\"Monday\">\n    </sm-date-time-picker>\n</div>\n\n<md-button \n\tui-sref=\"main.app\"\n\tclass=\"md-raised md-warn\">cancel</md-button>\n\n<md-button \n\ttype=\"submit\"\n\tclass=\"md-raised md-primary\">create</md-button>\n\n</form>\n";
+	module.exports = "<form \n\tname=\"create\"\n\tnovalidate\n\tng-submit=\"create.$valid && self.save()\" \n>\n\t<md-input-container layout=\"row\" flex=\"100\">\n\t\t<label>Title</label>\n\t\t<input required ng-model=\"self.data.title\">\n\t</md-input-container>\n\t<br>\n\n\t<md-input-container flex=\"100\" layout=\"row\">\n\t\t<label>price</label>\n\t\t<input required type=\"number\" ng-model=\"self.data.price\">\n\t</md-input-container>\n\t<br>\n\n\t<md-input-container flex=\"100\" layout=\"row\">\n\t\t<label>Description</label>\n\t\t<input ng-model=\"self.data.description\">\n\t</md-input-container>\n\t<br>\n\n\t<div  layout=\"row\"> \n\t    <sm-date-time-picker \n\t        fname=\"field\" \n\t        label=\"Date\"\n\t        ng-model=\"self.data.start_day\" \n\t        flex=\"50\"\n\t        flex-sm=\"100\"\n\t        on-focus\n\t        flex-xs=\"100\"                          \n\t        is-required=\"{{true}}\" \n\t        format=\"MM-DD-YYYY\"\n\t        mode=\"date\" \n\t        week-start-day=\"Monday\">\n\t    </sm-date-time-picker>\n\t</div>\n\n\t<md-button \n\t\tui-sref=\"main.app\"\n\t\tclass=\"md-raised md-warn\">cancel</md-button>\n\n\t<md-button \n\t\ttype=\"submit\"\n\t\tclass=\"md-raised md-primary\">create</md-button>\n\n</form>\n";
 
 /***/ },
-/* 15 */
+/* 21 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -546,6 +516,62 @@
 	}
 
 	exports.default = createCtr;
+
+/***/ },
+/* 22 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _limitTemplate = __webpack_require__(23);
+
+	var _limitTemplate2 = _interopRequireDefault(_limitTemplate);
+
+	var _limitController = __webpack_require__(24);
+
+	var _limitController2 = _interopRequireDefault(_limitController);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	// import './limit.css'
+
+	// modules //
+	// import Edit from './edit/edit.module.js'
+	// import Create from './create/create.module.js'
+
+	var limit = 'main.count.limit',
+	    app = angular.module(limit, []);
+
+	app.config(function ($stateProvider) {
+		$stateProvider.state(limit, {
+			url: 'limit',
+			views: {
+				'content@': {
+					template: _limitTemplate2.default,
+					controller: _limitController2.default,
+					controllerAs: 'self'
+				}
+			}
+		});
+	});
+
+	exports.default = app;
+
+/***/ },
+/* 23 */
+/***/ function(module, exports) {
+
+	module.exports = "";
+
+/***/ },
+/* 24 */
+/***/ function(module, exports) {
+
+	"use strict";
 
 /***/ }
 /******/ ]);

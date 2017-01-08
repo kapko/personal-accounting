@@ -17,7 +17,6 @@ app
 	.use(methodOverride())
 	.use(ex.static('views'))
 	.set('views', __dirname + '/views/')
-	.set('view engine', 'jade')
-	.get('/', function(req, res){res.render('index')});
+	.set('view engine', 'jade');
 
 module.exports = app;

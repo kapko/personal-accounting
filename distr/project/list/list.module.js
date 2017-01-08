@@ -1,16 +1,16 @@
-import template from './app.template.html'
-import controller from './app.controller.js'
-import './app.css'
+import template from './list.template.html'
+import controller from './list.controller.js'
 
 // modules //
 import Edit from './edit/edit.module.js'
 import Create from './create/create.module.js'
 
-var app = angular.module('main.app', [Edit.name, Create.name]);
+var link = 'main.count.list',
+	app = angular.module(link, [Edit.name, Create.name]);
 
 app.config(($stateProvider)=>{
-	$stateProvider.state('main.app', {
-		url: '/',
+	$stateProvider.state(link, {
+		url: 'listings',
 		views:{
 			'content@':{
 				template,

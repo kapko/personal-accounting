@@ -12,13 +12,9 @@ body.container
 	div(layout-padding md-colors="{background: 'blue'}")
 		h1 header navigation
 	div(layout="row" flex)
-		div(flex="20" style="background: #eee" layout-padding)
-			p list
-			p chart
-			p notifications
+		div(flex="20" ui-view="sidebar" style="background: #eee" layout-padding)
 		div(flex="80" ui-view="content")
 			h1 loading ...
-
 
 	script(src="/js/vendor.js")
 	script(src="/js/app.js")

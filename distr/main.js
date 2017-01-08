@@ -1,6 +1,6 @@
 import httpService from './service/http.js'
 import helperService from './service/helper.js'
-import Project from './app/app.module.js'
+import Project from './project/count.module.js'
 
 var Main = angular.module('main', [
 		'ngMaterial',

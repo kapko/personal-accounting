@@ -1,12 +1,12 @@
-import template from './edit.template.html'
-import controller from './edit.controller.js'
+import template from './create.template.html'
+import controller from './create.controller.js'
 
-var link = 'main.app.edit',
+var link = 'main.count.list.create',
 	app = angular.module(link, []);
 
 app.config(($stateProvider)=>{
 	$stateProvider.state(link, {
-		url: '/{id}',
+		url: 'create',
 		views:{
 			'content@':{
 				template,

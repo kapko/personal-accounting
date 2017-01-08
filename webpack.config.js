@@ -40,12 +40,6 @@ module.exports = {
 		]
 	},
 	plugins: [
-        // new webpack.ContextReplacementPlugin(/moment[\\\/]lang$/, /^\.\/(en)$/),
         new ExtractTextPlugin("custom.css"),
-        // new webpack.ProvidePlugin({
-        //     jQuery: 'jquery',
-        //     $: 'jquery',
-        //     jquery: 'jquery'
-        // })
     ]
 }
