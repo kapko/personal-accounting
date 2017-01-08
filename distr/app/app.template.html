@@ -1,0 +1,53 @@
+<md-container layout="row">
+	<md-input-container flex="100">
+		<label>Search ...</label>
+		<input ng-model="self.search">
+	</md-input-container>
+	<md-button 
+		ui-sref="main.app.create"
+		class="md-raised md-warn">create new </md-button>
+</md-container>
+
+<md-content  
+	layout-padding
+	md-colors="{background: 'green'}"
+	layout="row">
+	<md-list flex="10"><strong>#</strong></md-list>
+	<md-list flex="100"><strong>Name</strong></md-list>
+	<md-list flex="100"><strong>Price</strong></md-list>
+	<md-list flex="100"><strong>Limit</strong></md-list>
+	<md-list flex="100"><strong>Description</strong></md-list> 
+	<md-list flex="100"><strong>date</strong></md-list>
+</md-content>
+
+<md-content  
+	ng-repeat="list in self.lists"
+	style="border-top: 1px solid #333;"
+	layout-padding
+	layout="row">
+	<md-list flex="10"><p>#</p></md-list>
+	<md-list flex="100"><p>{{ list.title }}</p></md-list>
+	<md-list flex="100"><p>{{ list.price }}</p></md-list>
+	<md-list flex="100"><p>{{ list.limit }}</p></md-list>
+	<md-list flex="100"><p>{{ list.description }}</p></md-list>
+	<md-list flex="100">
+		<span>{{ list.start_day }}</span>
+		<i 
+			ui-sref="main.app.edit({id: list._id})"
+			class="material-icons">create</i>
+		<i 
+			ng-click="self.remove(list)"
+			class="material-icons">delete</i>
+	</md-list>
+</md-content>
+
+<md-content  
+	layout-padding
+	style="border-top: 5px solid #eee;"
+	md-colors="{background: 'green'}"
+	layout="row">
+	<md-list flex="50"><span>Total is</span></md-list>
+	<md-list flex="50"><strong>{{ self.total }}</strong></md-list>
+</md-content>
+
+

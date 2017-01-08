@@ -1,17 +1,11 @@
-var ex = require('express'),
-	app = require('express')(),
-	jade = require('jade'),
-	http = require('http').Server(app),
-	server = http.listen('3333');
+var app = require('./app.js');
 
 app
-	.set('view engine', 'jade')
-	.set('views', __dirname + '/views')
-	.use(ex.static(__dirname + '/views'));
+	.use('/api', require('./api/list/list.server.js'))
+	.use('/api', require('./api/limit/limit.model.js'))
+	.listen(3030);
 
-app.get('/', function(req, res){
-	res.render('index', {data:123});
-});
+console.log('port 3030');
 
 
 

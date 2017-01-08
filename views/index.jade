@@ -1,38 +1,25 @@
-doctype html
-html(lang='en')
-	head
-		meta(charset='UTF-8')
-		title index
-		link(rel="stylesheet", href="/bootstrap.css")
-	body
-		.container
-			h2 simple ament for person
-			p  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste deserunt perspiciatis sed provident, debitis labore quidem ut. Quod quidem natus illum distinctio aliquid, esse tempore, at illo voluptatum repellat fuga.
+<!DOCTYPE html>
+html(lang="en" ng-app="main")
+head
+	meta(charset="UTF-8")
+	base(href="/")
+	title Document
+	link(rel="stylesheet", href="material.css")
+	link(rel="stylesheet", href="/js/custom.css")
+	link(href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet")
+body.container
 
-			table.table
-				thead
-					tr
-						th Title
-						th wich
-						th day
-						th why
-				tbody
-					tr
-						td shopping
-						td simple day
-						td 12.12.12
-						td shoping
-					tr
-						td shopping
-						td simple day
-						td 12.12.12
-						td shoping
+	div(layout-padding md-colors="{background: 'blue'}")
+		h1 header navigation
+	div(layout="row" flex)
+		div(flex="20" style="background: #eee" layout-padding)
+			p list
+			p chart
+			p notifications
+		div(flex="80" ui-view="content")
+			h1 loading ...
 
 
-
-
-
-
-
-
-
+	script(src="/js/vendor.js")
+	script(src="/js/app.js")
+		
